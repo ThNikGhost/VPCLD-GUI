@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>infoWindow</class>
+ <widget class="QDialog" name="infoWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>431</width>
+    <height>179</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Очень важная информация!</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Это программа созданная для личного пользования, &lt;br&gt;но для большего опыта создаются все пришедшие в голову функции.&lt;/p&gt;&lt;p&gt;Если Вам попала в руки эта программа, то напишите мне!&lt;/p&gt;&lt;p&gt;Информацию о том, как можно связаться с создателем,&lt;br&gt; найдёте в соответсвующем меню &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Fira Sans','Arial'; font-size:13px; color:#656565; background-color:#f1f1f1;&quot;&gt;ヽ(・∀・)ﾉ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignRight|Qt::AlignBottom">
+    <widget class="QPushButton" name="btn_ok">
+     <property name="text">
+      <string>ОК</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
