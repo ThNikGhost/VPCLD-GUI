@@ -26,6 +26,10 @@ def get_list_db(list_: list, sort: bool = False):
             new_list.append(k)
     return new_list
 
+def delete(text):
+    sql(f"DELETE FROM Data WHERE Category = '{text}';")
+    conn.commit()
+
 # Закрывает конект БД
 def Close():
     conn.close()
