@@ -17,12 +17,11 @@ def getdata():
     return cursor.fetchall()
 
 # Преобразует полученные данные в массив для удобства
-def get_list_db(sort: bool = False):
-    data = getdata()
+def get_list_db(list_: list, sort: bool = False):
     new_list = []
     if sort == True:
-        data = sorted(data)
-    for i in data:
+        list_ = sorted(list_)
+    for i in list_:
         for k in i:
             new_list.append(k)
     return new_list
@@ -35,10 +34,8 @@ def insert_data(name):
     sql(f'INSERT INTO Data(Category) VALUES("{name}")')
     conn.commit()
 
-
-
-
-    
-
-
-
+sql("SELECT name FROM sqlite_master WHERE type='table' AND name='Data'")
+table = get_list_db(cursor.fetchall())
+if len(table) == 0:
+    sql("CREATE TABLE Data (Category TEXT UNIQUE)")
+    conn.commit()
