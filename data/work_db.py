@@ -1,5 +1,5 @@
 import sqlite3
-conn = sqlite3.connect('.\data\DataBase.db')
+conn = sqlite3.connect('.\data\DataBase.sqlite')
 cursor = conn.cursor()
 
 # Упрощаю ввод SQL запросов и при ошибке, выводит введённый запрос
@@ -27,7 +27,7 @@ def get_list_db(list_: list, sort: bool = False):
     return new_list
 
 def delete(text):
-    sql(f"DELETE FROM Data WHERE Category = '{text}';")
+    sql(f"DROP TABLE {text};")
     conn.commit()
 
 # Закрывает конект БД
@@ -35,11 +35,29 @@ def Close():
     conn.close()
 
 def insert_data(name):
-    sql(f'INSERT INTO Data(Category) VALUES("{name}")')
+    sql(f"""CREATE TABLE {name} (
+    Смотрю        TEXT UNIQUE,
+    Просмотренные TEXT UNIQUE,
+    Любимые       TEXT UNIQUE,
+    Брошенные     TEXT UNIQUE);
+        """)
     conn.commit()
 
-sql("SELECT name FROM sqlite_master WHERE type='table' AND name='Data'")
-table = get_list_db(cursor.fetchall())
-if len(table) == 0:
-    sql("CREATE TABLE Data (Category TEXT UNIQUE)")
-    conn.commit()
+def get_name_table():
+    sql("SELECT name FROM sqlite_master")
+    names = get_list_db(cursor.fetchall())
+    names = [i for i in names if not i.startswith('sqlite') and not i.startswith('Anime')]
+    return names
+
+def get_data_from_db(name):
+    sql(f"SELECT {name} FROM test")
+    return get_list_db(cursor.fetchall())
+
+def get_quantity(name):
+    sql(f"SELECT count({name}) FROM test")
+    return get_list_db(cursor.fetchall())
+# sql("SELECT name FROM sqlite_master WHERE type='table' AND name='Data'")
+# table = get_list_db(cursor.fetchall())
+# if len(table) == 0:
+#     sql("CREATE TABLE Data (Category TEXT UNIQUE)")
+#     conn.commit()
