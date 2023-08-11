@@ -4,8 +4,9 @@ from designer.main_v1_ui import Ui_mainWindowChoose
 from designer.deleteFrom_v1_ui import Ui_From_deleteCategory
 from designer.infowindow_v1_ui import Ui_infoWindow
 from designer.contacts_v1_ui import Ui_contactswindow
+from designer.table_v1_ui import Ui_tableWindow
 from PyQt6.QtWidgets import QApplication, QCheckBox, QWidget, QMainWindow, QDialog, QPushButton, QMessageBox
-from data.work_db import insert_data, get_list_db, getdata, delete
+from data.work_db import insert_data, delete, get_name_table
 
 
 #from infowindow import Ui_Dialog
@@ -20,6 +21,20 @@ class Main(QMainWindow):
         self.mainform.actionQuit.triggered.connect(self.quit)
         self.mainform.actionAbout.triggered.connect(self.about)
         self.mainform.actionContacts.triggered.connect(self.contacts)
+
+    def calltable(self):
+        name = self.sender().text()
+        if name in ["Аниме", "Фильмы", "Игры", "Книги"]:
+            print("FDFDFDFDFDFDF")
+        self.tablewindow = QWidget()
+        self.tw = Ui_tableWindow()
+        self.tw.setupUi(self.tablewindow)
+        self.tablewindow.setWindowTitle(name)
+        self.set_data_to_db()
+        self.tablewindow.show()
+
+    def set_data_to_db(self):
+        pass        
 
     def contacts(self):
         self.contactswindow = QWidget()
@@ -39,7 +54,7 @@ class Main(QMainWindow):
         self.deletewindow = QWidget()
         self.dw = Ui_From_deleteCategory()
         self.dw.setupUi(self.deletewindow)
-        for i in get_list_db(getdata()):
+        for i in get_name_table():
             self.dw.checkBox = QCheckBox(parent=self.deletewindow)
             self.dw.checkBox.setObjectName(i)
             self.dw.checkBox.setText(i)
@@ -80,12 +95,11 @@ class Main(QMainWindow):
         if len(text.replace(' ', '')) == 0:
             self.critical_message('Введите название!')
             return None
-        try:
+        elif text in get_name_table():
+            self.critical_message('Такое название уже есть!')
+            return None
+        else:
             insert_data(text)
-        except Exception as e:
-            if str(e) == 'UNIQUE constraint failed: Data.Category':
-                self.critical_message('Такая категория уже существует!')
-
         self.clearLayout(self.mainform.verticalLayout)
         self.create_buttons()
         self.dialogYesNo.close()
@@ -108,13 +122,12 @@ class Main(QMainWindow):
                 child.widget().deleteLater()
 
     def create_buttons(self):
-        for i in get_list_db(getdata()):
+        for i in get_name_table():
             self.mainform.pushButton = QPushButton(parent=self.mainform.centralwidget)
             self.mainform.pushButton.setObjectName(i)
             self.mainform.pushButton.setText(i)
-
-
             self.mainform.verticalLayout.addWidget(self.mainform.pushButton)
+            self.mainform.pushButton.clicked.connect(self.calltable)
 
  
 
