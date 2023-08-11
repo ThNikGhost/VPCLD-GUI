@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_mainWindowChoose(object):
     def setupUi(self, mainWindowChoose):
         mainWindowChoose.setObjectName("mainWindowChoose")
-        mainWindowChoose.resize(225, 275)
+        mainWindowChoose.resize(226, 278)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -29,7 +29,6 @@ class Ui_mainWindowChoose(object):
         self.verticalLayout.setContentsMargins(20, 0, 20, -1)
         self.verticalLayout.setSpacing(18)
         self.verticalLayout.setObjectName("verticalLayout")
-
         self.verticalLayout_2.addLayout(self.verticalLayout)
         spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem)
@@ -41,7 +40,7 @@ class Ui_mainWindowChoose(object):
         self.verticalLayout_2.addWidget(self.btn_DeleteCategory)
         mainWindowChoose.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=mainWindowChoose)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 225, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 226, 22))
         self.menubar.setObjectName("menubar")
         self.menuinfo = QtWidgets.QMenu(parent=self.menubar)
         self.menuinfo.setObjectName("menuinfo")
@@ -66,11 +65,12 @@ class Ui_mainWindowChoose(object):
     def retranslateUi(self, mainWindowChoose):
         _translate = QtCore.QCoreApplication.translate
         mainWindowChoose.setWindowTitle(_translate("mainWindowChoose", "Меню выбора категории."))
-
         self.chooseCategory.setText(_translate("mainWindowChoose", "Добавить новую категорию:"))
         self.btn_DeleteCategory.setText(_translate("mainWindowChoose", "Удалить категорию"))
-        self.menuinfo.setTitle(_translate("mainWindowChoose", "Файл"))
-        self.menuHelp.setTitle(_translate("mainWindowChoose", "Помощь"))
-        self.actionQuit.setText(_translate("mainWindowChoose", "Выход"))
-        self.actionAbout.setText(_translate("mainWindowChoose", "О программе"))
-        self.actionContacts.setText(_translate("mainWindowChoose", "Создатель"))
+        self.menuinfo.setTitle(_translate("mainWindowChoose", "File"))
+        self.menuHelp.setTitle(_translate("mainWindowChoose", "Help"))
+        self.actionQuit.setText(_translate("mainWindowChoose", "Quit"))
+        self.actionAbout.setText(_translate("mainWindowChoose", "About"))
+        self.actionContacts.setText(_translate("mainWindowChoose", "Contacts"))
+
+    
