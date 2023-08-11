@@ -1,5 +1,7 @@
 DataBase.db
-
+test.py
+designer/test_table_ui.py
+designer/test_table.ui
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
