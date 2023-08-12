@@ -32,8 +32,6 @@ class Main(QMainWindow):
     def calltable(self):
         self.hide()
         self.name = self.sender().text()
-        if self.name in ["Аниме", "Фильмы", "Игры", "Книги"]:
-            print("FDFDFDFDFDFDF")
         self.tablewindow = QWidget()
         self.tw = table_v1_ui.Ui_tableWindow()
         self.tw.setupUi(self.tablewindow)
