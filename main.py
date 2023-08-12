@@ -54,7 +54,7 @@ class Main(QMainWindow):
         text = self.fa.lineEdit_addrec.text().rstrip()
         cat = self.fa.comboBox_123.currentText()
         insert_data(self.name, cat, text)
-        self.quit()
+        self.form_addrec.hide()
         index = self.list_.index(cat)
         self.clearLayout(self.tw.verticalLayout_5)
         self.createtabwindow()
@@ -74,14 +74,14 @@ class Main(QMainWindow):
         self.tw.tabWidget.setCurrentIndex(index)
 
     def cell_clicked(self, row):
-        self.sender = self.sender()  # Получаем ссылку на объект, вызвавший сигнал
-        selection_model = self.sender.selectionModel()
+        self.sender_ = self.sender()  # Получаем ссылку на объект, вызвавший сигнал
+        selection_model = self.sender_.selectionModel()
         selected_indexes = selection_model.selectedIndexes()
 
         if selected_indexes:
             row = selected_indexes[0].row()
             column = selected_indexes[0].column()
-            index = self.sender.model().index(row, column)  # Получаем индекс ячейки
+            index = self.sender_.model().index(row, column)  # Получаем индекс ячейки
             self.text_cell = index.data()
         else:
             print("No cell selected")
