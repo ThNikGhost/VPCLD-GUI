@@ -26,20 +26,36 @@ def get_list_db(list_: list, sort: bool = False):
             new_list.append(k)
     return new_list
 
-def delete(text):
+def delete_table(text):
     sql(f"DROP TABLE {text};")
+    conn.commit()
+
+def delete_cell(text, column, table):
+    sql(f"""DELETE FROM {table}
+                WHERE {column} = '{text}'
+        """)
     conn.commit()
 
 # Закрывает конект БД
 def Close():
     conn.close()
 
-def insert_data(name):
+def create_db(name):
     sql(f"""CREATE TABLE {name} (
     Смотрю        TEXT UNIQUE,
     Просмотренные TEXT UNIQUE,
     Любимые       TEXT UNIQUE,
     Брошенные     TEXT UNIQUE);
+        """)
+    conn.commit()
+
+def insert_data(table, column, text):
+    sql(f"""INSERT INTO {table} (
+                     {column}
+                 )
+                 VALUES (
+                     '{text}'
+                 );
         """)
     conn.commit()
 
@@ -56,8 +72,3 @@ def get_data_from_db(name):
 def get_quantity(name):
     sql(f"SELECT count({name}) FROM test")
     return get_list_db(cursor.fetchall())
-# sql("SELECT name FROM sqlite_master WHERE type='table' AND name='Data'")
-# table = get_list_db(cursor.fetchall())
-# if len(table) == 0:
-#     sql("CREATE TABLE Data (Category TEXT UNIQUE)")
-#     conn.commit()
