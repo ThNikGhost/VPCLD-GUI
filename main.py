@@ -9,13 +9,10 @@ from designer import (
     table_v1_ui,
     window_move_ui
 )
-
 from PyQt6.QtWidgets import QApplication, QTabWidget, QVBoxLayout, QAbstractItemView, QTableView, QCheckBox, QWidget, QMainWindow, QDialog, QPushButton, QMessageBox, QAbstractItemView
 from data.work_db import create_db, delete_cell, delete_table, get_name_table, insert_data
 from PyQt6.QtSql     import QSqlDatabase, QSqlQueryModel
 
-
-#from infowindow import Ui_Dialog
 class Main(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)                
@@ -37,7 +34,6 @@ class Main(QMainWindow):
         self.tw.setupUi(self.tablewindow)
         self.tablewindow.setWindowTitle(self.name)
         self.createtabwindow()
-        #self.set_data_from_db()
         self.tw.btn_move.clicked.connect(self.move_rec)
         self.tw.btn_addRecord.clicked.connect(self.addrec)
         self.tw.btn_removedRecord.clicked.connect(self.removerec)
@@ -77,7 +73,6 @@ class Main(QMainWindow):
         self.createtabwindow()
         self.tw.tabWidget.setCurrentIndex(index)
 
-    #+++
     def cell_clicked(self, row):
         self.sender = self.sender()  # Получаем ссылку на объект, вызвавший сигнал
         selection_model = self.sender.selectionModel()
@@ -91,7 +86,6 @@ class Main(QMainWindow):
         else:
             print("No cell selected")
 
-    #+++
     def returnMenu(self):
         self.show()
         self.tablewindow.hide()
@@ -120,7 +114,6 @@ class Main(QMainWindow):
         name_table = self.name
         insert_data(name_table, text_combobox, text_cell)
         delete_cell(text_cell, active_tab_text, name_table)
-        #self.sender.clearSelection()
         
         self.clearLayout(self.tw.verticalLayout_5)
         self.createtabwindow()
@@ -133,26 +126,21 @@ class Main(QMainWindow):
         self.tw.tabWidget = QTabWidget(parent=self.tablewindow)
         self.tw.tabWidget.setTabBarAutoHide(True)
         self.tw.tabWidget.setObjectName("tabWidget")
-        #self.tw.gridLayout.addWidget(self.tw.tabWidget, 0, 0, 1, 5)
         self.tw.verticalLayout_5.addWidget(self.tw.tabWidget)
         self.tw.tabWidget.currentChanged.connect(self.active_tab_changed)
-
         for i in range(4):
             self.tw.tab = QWidget()
             self.tw.tab.setObjectName(f"tab_{i}")
             self.tw.verticalLayout = QVBoxLayout(self.tw.tab)
             self.tw.verticalLayout.setObjectName("verticalLayout")
-            #self.tw.tab.setTabText(list_[i])
             self.tw.tableView = QTableView(parent=self.tw.tab)
             self.tw.tableView.setObjectName("tableView")
             self.tw.tableView.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
             self.tw.verticalLayout.addWidget(self.tw.tableView)
             self.tw.tableView.clicked.connect(self.cell_clicked)
-
             self.tw.tabWidget.addTab(self.tw.tab, self.list_[i])
-            
             self.set_data_from_db(self.list_[i], self.tw.tableView)
-        #
+        
     
     def active_tab_changed(self, index):
         self.current_tab = self.tw.tabWidget.tabText(index)
@@ -167,10 +155,6 @@ class Main(QMainWindow):
 
         self.createModel(text, self.name)
         object_.setModel(self.model)
-
-                   
-    
-
 
     def createConnection(self):
         self.db = QSqlDatabase.addDatabase('QSQLITE')
@@ -277,7 +261,6 @@ class Main(QMainWindow):
     def critical_message(self, text=str):
         """Критическое окно с ошибкой"""
         critical = QMessageBox.critical(self, 'Critical message', text)
-        #self.infowindow.close()
 
     def quit(self): 
         sender = self.sender()  # Получаем объект отправителя сигнала (кнопку)
@@ -299,7 +282,6 @@ class Main(QMainWindow):
             self.mainform.pushButton.clicked.connect(self.calltable)
 
  
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
