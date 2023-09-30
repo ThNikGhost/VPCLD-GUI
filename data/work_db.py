@@ -43,6 +43,7 @@ def Close():
 def create_db(name):
     sql(f"""CREATE TABLE {name} (
     Смотрю        TEXT UNIQUE,
+    Буду смотреть TEXT UNIQUE,    
     Просмотренные TEXT UNIQUE,
     Любимые       TEXT UNIQUE,
     Брошенные     TEXT UNIQUE);

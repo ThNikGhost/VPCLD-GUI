@@ -121,14 +121,14 @@ class Main(QMainWindow):
         self.move_window.hide()
 
     def createtabwindow(self):
-        self.list_ = ["Смотрю", "Любимые", "Просмотренные", "Брошенные"]
+        self.list_ = ["Смотрю", "Буду смотреть", "Просмотренные", "Любимые", "Брошенные"]
         self.createConnection()
         self.tw.tabWidget = QTabWidget(parent=self.tablewindow)
         self.tw.tabWidget.setTabBarAutoHide(True)
         self.tw.tabWidget.setObjectName("tabWidget")
         self.tw.verticalLayout_5.addWidget(self.tw.tabWidget)
         self.tw.tabWidget.currentChanged.connect(self.active_tab_changed)
-        for i in range(4):
+        for i in range(5):
             self.tw.tab = QWidget()
             self.tw.tab.setObjectName(f"tab_{i}")
             self.tw.verticalLayout = QVBoxLayout(self.tw.tab)
